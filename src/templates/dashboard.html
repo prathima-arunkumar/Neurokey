@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  body {
+    background: #0b0c2a;
+    overflow: hidden;
+  }
+
+  .pulse-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: radial-gradient(circle at center, #1e1f4b, #0b0c2a);
+    z-index: -2;
+  }
+
+  .pulse-bg::before, .pulse-bg::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: repeating-radial-gradient(
+      circle,
+      rgba(0, 255, 255, 0.1) 0px,
+      rgba(0, 255, 255, 0.2) 2px,
+      transparent 4px,
+      transparent 8px
+    );
+    animation: pulseMove 10s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes pulseMove {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .brain-icon {
+    width: 100px;
+    height: 100px;
+    background: url('https://img.icons8.com/ios-filled/100/ffffff/brain.png') no-repeat center center;
+    background-size: contain;
+    animation: brainPulse 2s infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes brainPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+</style>
+
+<div class="pulse-bg"></div>
+
+<div class="text-white text-center mt-16 px-4">
+  <div class="brain-icon mb-4"></div>
+  <h2 class="text-3xl font-bold">🔐 Welcome to Your Secure Dashboard</h2>
+  <p class="mt-4 text-lg">You’ve logged in using EEG-based authentication!</p>
+</div>
+{% endblock %}

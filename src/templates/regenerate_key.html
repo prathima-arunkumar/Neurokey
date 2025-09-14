@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mx-auto px-4 py-6">
+  <h2 class="text-xl font-bold mb-4">Regenerate NeuroKey</h2>
+
+  <form method="POST" class="space-y-4">
+    <div>
+      <label for="user_id" class="block font-medium">User ID:</label>
+      <input type="text" name="user_id" class="w-full border px-3 py-2 rounded" required>
+    </div>
+    <div>
+      <label for="new_task" class="block font-medium">New Task:</label>
+      <select name="new_task" class="w-full border px-3 py-2 rounded">
+        <option value="reading">Reading</option>
+        <option value="imagination">Imagination</option>
+        <option value="writing">Writing</option>
+      </select>
+    </div>
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">🔄 Regenerate Key</button>
+  </form>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="mt-4">
+        {% for category, message in messages %}
+          <p class="text-{{ 'green-600' if category == 'success' else 'red-600' }}">{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+</div>
+{% endblock %}

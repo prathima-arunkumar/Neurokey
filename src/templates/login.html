@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h2 class="text-2xl font-bold mb-4">Login with NeuroKey</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="bg-{{ 'green-100' if category == 'success' else 'red-100' }} text-{{ 'green-700' if category == 'success' else 'red-700' }} px-4 py-2 mb-4 rounded">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="post" class="space-y-4">
+    <div>
+      <label for="user_id" class="block font-medium">User ID:</label>
+      <input type="text" name="user_id" required class="w-full border rounded px-3 py-2" />
+    </div>
+
+    <div>
+      <label for="task" class="block font-medium">Task:</label>
+      <select name="task" class="w-full border rounded px-3 py-2">
+        <option value="reading">Reading</option>
+        <option value="writing">Writing</option>
+        <option value="imagination">Imagination</option>
+      </select>
+    </div>
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">🔐 Login</button>
+  </form>
+
+  <div class="mt-6">
+    <p class="text-sm text-gray-600">❓ Forgot your mental task?</p>
+    <a href="{{ url_for('regenerate_key') }}" class="text-blue-500 hover:underline">
+      🔁 Regenerate NeuroKey
+    </a>
+  </div>
+</div>
+{% endblock %}

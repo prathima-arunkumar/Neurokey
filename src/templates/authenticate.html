@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <h2 class="text-2xl font-bold mb-4">Authentication</h2>
+  <form method="POST" action="/authenticate" class="space-y-4">
+    <div>
+      <label for="user_id" class="block font-medium">User ID:</label>
+      <input type="text" name="user_id" required class="w-full border rounded px-3 py-2" />
+    </div>
+    <div>
+      <label for="task" class="block font-medium">Task:</label>
+      <select name="task" class="w-full border rounded px-3 py-2">
+        <option value="reading">Reading</option>
+        <option value="imagination">Imagination</option>
+        <option value="writing">Writing</option>
+      </select>
+    </div>
+    <button type="submit" class="bg-red-600 text-black px-4 py-2 rounded">Authenticate</button>
+  </form>
+
+  {% if result is defined %}
+  <div class="mt-6 p-4 border rounded bg-gray-100">
+    <p><strong>Predicted Task:</strong> {{ result.predicted }}</p>
+    <p><strong>Confidence:</strong> {{ result.confidence }}</p>
+    {% if result.success %}
+    <p class="text-green-600 font-semibold">✅ Authentication successful!</p>
+    <div class="mt-4">
+      <form method="POST" action="/generate_key">
+        <input type="hidden" name="user_id" value="{{ result.user_id }}">
+        <input type="hidden" name="task" value="{{ result.task }}">
+        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">
+          ✅ Proceed to Key Generation
+        </button>
+      </form>
+    </div>
+    {% else %}
+    <p class="text-red-600 font-semibold">❌ Authentication failed.</p>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

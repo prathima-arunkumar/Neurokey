@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Reset Biometric Template</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>User ID</label>
+        <input type="text" name="user_id" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>New Task</label>
+        <input type="text" name="new_task" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-danger">Reset Template</button>
+</form>
+{% endblock %}

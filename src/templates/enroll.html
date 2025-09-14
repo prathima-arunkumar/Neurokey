@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Enrollment</h2>
+<form method="post">
+    <div class="mb-3">
+        <label>User ID</label>
+        <input type="text" name="user_id" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Task</label>
+        <select name="task" class="form-control" required>
+            <option value="">-- Select a task --</option>
+            <option value="reading">Reading</option>
+            <option value="writing">Writing</option>
+            <option value="imagination">Imagination</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Enroll</button>
+</form>
+{% endblock %}
